@@ -1,0 +1,181 @@
+# The PARASOL site's MkDocs config. Ships as mkdocs.yml; the shared config
+# ships beside it as mkdocs.base.yml, and this inherits everything from it.
+# Set here only what differs from DSMLP.
+#
+# Mappings merge key by key, so `extra` below adds to the inherited one.
+# Lists -- nav, plugins, markdown_extensions -- REPLACE the inherited value
+# wholesale: override one and you own all of it.
+INHERIT: mkdocs.base.yml
+
+site_name: Datahub & PARASOL Documentation
+site_description: >-
+  Documentation for UC San Diego's Datahub and Platform for Applied Research,
+  Analytics, Science and Open Learning (PARASOL, formerly DSMLP).
+
+# This site's own address: every page's canonical URL and the sitemap, and the
+# preview banner's link to production. Published by parasol-publish.yml to
+# ucsd-ets/parasol-home-public, which the public-repo CNAME in
+# sites/parasol/overlay/ puts on this host. Change all three together.
+site_url: https://parasol.ucsd.edu/
+
+# The PARASOL stylesheet: the hub components and banner art, scoped under
+# main#main-content like theme/css/site.css. Shipped from sites/parasol/theme/.
+extra_css:
+  - css/parasol.css
+
+extra:
+  site_name_short: PARASOL
+
+  # PARASOL's own README is its home-page hub; do not use the DSMLP partial.
+  home_template: ''
+
+  # The home page's <title> (theme/main.html), in place of site_name. Other
+  # pages keep "Page | Datahub & PARASOL Documentation". Quoted: the value
+  # contains ": ", which YAML would otherwise read as a key.
+  home_title: "PARASOL: Platform for Applied Research, Analytics, Science and Open Learning"
+
+  # No site-wide draft notice (theme/partials/draft-banner.html). The shared
+  # config's notice, which flags the Fall 2026 reservation figures as
+  # unpublished, stays on DSMLP; empty here, the partial renders nothing.
+  draft_banner: ""
+
+  # Section banners (theme/partials/hero-banner.html). Each value is an art
+  # key: site-hero--<key> in css/parasol.css, drawn from
+  # docs/images/hero/<key>.webp. A page's own entry wins, then the innermost
+  # active nav section's, then the default.
+  hero:
+    home_only: false
+    default: docs
+    # The home page rotator (theme/partials/home-carousel.html): the review
+    # site's three slides. Each `art` is drawn from docs/images/hero/<art>.webp,
+    # the first slide's also from <art>-828.webp on phones.
+    home:
+      interval: 7000
+      slides:
+        - id: parasol
+          art: slide-home
+          title: PARASOL
+          accent: GPU computing for UC San Diego
+          text: PARASOL provides Jupyter, RStudio, and GPUs for coursework, student projects, and research. Open it in a browser through Datahub, or from a terminal.
+          link: /get-started/
+          label: Find your starting page
+        - id: open-learning
+          art: slide-open-learning
+          title: Open Learning
+          accent: Starting Winter 2027
+          text: Students in eligible data science and artificial intelligence programs get a Datahub workspace for coursework and exploration outside a course, with nothing to request.
+          link: /open-learning/
+          label: See who is eligible
+        - id: from-dsmlp
+          art: slide-rename
+          title: Formerly DSMLP
+          accent: Same platform, new name
+          text: Your sign-in, your files, and the Datahub address are the same as before. Every page of the documentation is here too, at the same address.
+          link: /about/from-dsmlp-to-parasol/
+          label: What the new name changes
+    pages:
+      overview.md: works
+      about/why-parasol.md: why
+      about/from-dsmlp-to-parasol.md: rename
+      support/README.md: support
+      search.md: docs
+    sections:
+      About: about
+      Get Started: start
+      Documentation: docs
+      Access: access
+      Workspaces & Storage: storage
+      Running Jobs: jobs
+      GPU Access: gpu
+      Environments: environments
+      Grading: grading
+      Reference: reference
+
+  # The preview-site placeholder, as in the shared config. The preview
+  # promotion substitutes into the staged mkdocs.yml, which for this site is
+  # this file, so the line has to be here too. It MUST stay empty.
+  preview_banner: ""
+
+# The PARASOL information architecture: About, Get Started, Documentation.
+# Every page is where the shared nav puts it, at the same URL -- only the
+# grouping differs -- so dsmlp-docs.ucsd.edu can redirect path for path.
+# `nav` is a list, so this REPLACES the shared nav rather than merging with it:
+# a page added to the shared nav must be added here too. The strict build
+# fails on a page missing from it (validation.omitted_files in mkdocs.yml).
+#
+# The home page is not in it: the site name in the title band links home, as
+# on the review site, and a Home item in the navbar only repeated it. Listing
+# the page in not_in_nav keeps the strict build from failing on it. The value
+# is a string, so it replaces the shared one, and search.md is repeated from
+# there; the leading / anchors README.md to the root, not every section's.
+not_in_nav: |
+  search.md
+  /README.md
+
+nav:
+  - About:
+      - about/README.md
+      - about/why-parasol.md
+      - about/from-dsmlp-to-parasol.md
+      - overview.md
+  - Get Started:
+      - get-started/README.md
+      - student-in-a-course.md
+      - working-from-the-command-line.md
+      - instructor-or-ta.md
+      - open-learning.md
+      - student-project.md
+      - individual-researcher.md
+      - faculty-research-lab.md
+  - Documentation:
+      - docs/README.md
+      - Access:
+          - access/README.md
+          - access/datahub-in-the-browser.md
+          - access/the-login-node.md
+          - access/remote-editor-setup.md
+          - access/when-access-starts-and-ends.md
+          - access/sign-in-and-session-problems.md
+      - Workspaces & Storage:
+          - workspaces-and-storage/README.md
+          - workspaces-and-storage/what-a-workspace-is.md
+          - workspaces-and-storage/your-files-and-quotas.md
+          - workspaces-and-storage/moving-and-sharing-data.md
+          - workspaces-and-storage/datasets.md
+      - Running Jobs:
+          - running-jobs/README.md
+          - running-jobs/job-modes-and-limits.md
+          - running-jobs/launch-sh-reference.md
+          - running-jobs/watching-your-job.md
+          - running-jobs/checkpointing.md
+          - running-jobs/kubernetes.md
+      - GPU Access:
+          - gpu-access/README.md
+          - gpu-access/gpu-classes.md
+          - gpu-access/workloads-by-gpu-class.md
+          - gpu-access/gpu-hardware.md
+          - gpu-access/quotas-and-availability.md
+          - gpu-access/reservations.md
+          - gpu-access/service-units-and-budgets.md
+          - gpu-access/what-ends-a-session.md
+      - Environments:
+          - environments/README.md
+          - environments/standard-images.md
+          - environments/customizing-your-environment.md
+          - environments/building-a-custom-image.md
+      - Grading:
+          - grading/README.md
+          - grading/choosing-a-grading-tool.md
+          - grading/notebook-grading-workflow.md
+          - grading/grading-failures.md
+      - Reference:
+          - reference/README.md
+          - reference/error-messages.md
+          - reference/reservation-events.md
+          - reference/getting-help.md
+          - reference/glossary.md
+          - reference/coming-from-hpc.md
+          - reference/managing-a-group.md
+          - reference/software.md
+          - reference/policy.md
+  - Support: support/README.md

@@ -1,0 +1,189 @@
+site_name: Datahub & DSMLP Documentation
+site_url: https://dsmlp-docs.ucsd.edu/
+site_description: >-
+  Documentation for UC San Diego's Datahub and Data Science & Machine Learning
+  Platform (DSMLP).
+docs_dir: docs
+site_dir: _site
+
+# A bespoke theme, not a Material override. The theme IS the UC San Diego
+# Decorator 5 chrome, so no third-party CSS framework loads and nothing can
+# collide with Bootstrap 3's class vocabulary. See DECORATOR.md.
+theme:
+  name: null
+  custom_dir: theme
+  # Without this, theme/404.html is never rendered. MkDocs' built-in themes
+  # list 404.html in their own mkdocs_theme.yml; a name: null theme has no
+  # such file, so only MkDocs' sitemap.xml is built and GitHub Pages falls
+  # back to its generic "404 File not found" page.
+  static_templates:
+    - 404.html
+
+extra:
+  site_name_short: DSMLP
+  feedback_email: parasol@ucsd.edu
+  home_template: partials/home-dsmlp.html
+
+  # The home page rotator (theme/partials/home-carousel.html). The shared
+  # theme carries the component; this configuration keeps it home-only.
+  hero:
+    home_only: true
+    home:
+      interval: 7000
+      slides:
+        - id: dsmlp
+          art: hero-home
+          title: DSMLP
+          accent: GPU computing for UC San Diego
+          text: DSMLP provides Jupyter, RStudio, and GPUs for coursework, student projects, and research. Open it in a browser through Datahub, or from a terminal.
+          link: /overview/
+          label: How DSMLP works
+        - id: gpu-reservations
+          art: hero-gpu
+          title: GPUs on Reservation
+          accent: New for Fall 2026
+          text: Book a GPU window ahead of time, or launch on demand and the reservation system creates a lease for you. Both draw on your workspace's Service Unit budget.
+          link: /gpu-access/reservations/
+          label: How reservations work
+        - id: open-learning
+          art: hero-open-learning
+          title: Open Learning
+          accent: Starting Winter 2027
+          text: Students in eligible data science and artificial intelligence programs get a Datahub workspace for coursework and exploration outside a course, with nothing to request.
+          link: /open-learning/
+          label: See who is eligible
+        - id: documentation
+          art: hero-docs
+          title: One Documentation Home
+          accent: Start with a role, then go deeper
+          text: Find a guide for coursework, projects, or research, then use the technical documentation for jobs, GPUs, environments, and support.
+          link: /overview/
+          label: Browse the documentation
+
+  # Preview-site notice, shown on every page by
+  # theme/partials/preview-banner.html. This MUST stay empty here.
+  # .github/workflows/preview-site.yml substitutes a value into this exact line
+  # while staging the preview, so the production build never carries a banner
+  # and stays byte-identical. The workflow fails loudly if this line stops
+  # matching, rather than silently publishing an unlabelled preview.
+  preview_banner: ""
+
+  # Site-wide draft notice, shown on every page by
+  # theme/partials/draft-banner.html. Clear this value to remove it everywhere
+  # once the content is signed off -- there is no per-page markup to hunt down.
+  draft_banner: >-
+    This documentation is in draft and under active review. Figures for the
+    Fall 2026 GPU reservation system are not yet published, and some pages
+    describe behavior that has not been verified against a primary source.
+    Confirm any figure with
+    <a href="mailto:parasol@ucsd.edu">parasol@ucsd.edu</a> before relying on it.
+
+# In-site search. The Decorator chrome already owns #search, #q and
+# #search-scope and points them at the campus-wide redirect, so this cannot
+# reuse that box -- the search UI lives in the canvas instead, on /search/,
+# with the plugin's own mkdocs- prefixed ids. See theme/partials/search-box.html.
+plugins:
+  - search
+
+# Python-Markdown is NOT GitHub Flavored Markdown. These extensions close the
+# gap: task lists, strikethrough, autolinks and footnotes all fail without them.
+markdown_extensions:
+  - toc:
+      permalink: true
+      permalink_title: Link to this section
+      # NOTE: the GitHub-compatible slugify is installed by tools/hooks.py
+      # in on_config, not here. A `!!python/name:` reference would need the
+      # project root on PYTHONPATH, which mkdocs does not add; the hook is
+      # loaded by path and always works.
+  - tables
+  - fenced_code
+  - footnotes
+  - attr_list
+  - md_in_html
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.magiclink
+  - pymdownx.superfences
+
+# The DSMLP home page is a theme partial, so docs/README.md can stay vanilla
+# Markdown while the page uses the shared hub layout.
+
+# GitHub alert callouts (> [!NOTE]) are not native to Python-Markdown.
+hooks:
+  - tools/hooks.py
+
+not_in_nav: |
+  search.md
+
+# Catch broken cross-references at build time. The imported content is densely
+# cross-linked with relative .md links and anchors, so this is the main guard
+# against a rename stranding a dozen pages. CI runs with --strict, which turns
+# every one of these into a build failure.
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+nav:
+  - Overview: overview.md
+  - Get Started:
+      - student-in-a-course.md
+      - working-from-the-command-line.md
+      - instructor-or-ta.md
+      - open-learning.md
+      - student-project.md
+      - individual-researcher.md
+      - faculty-research-lab.md
+  - Documentation:
+      - README.md
+      - Access:
+          - access/README.md
+          - access/datahub-in-the-browser.md
+          - access/the-login-node.md
+          - access/remote-editor-setup.md
+          - access/when-access-starts-and-ends.md
+          - access/sign-in-and-session-problems.md
+      - Workspaces & Storage:
+          - workspaces-and-storage/README.md
+          - workspaces-and-storage/what-a-workspace-is.md
+          - workspaces-and-storage/your-files-and-quotas.md
+          - workspaces-and-storage/moving-and-sharing-data.md
+          - workspaces-and-storage/datasets.md
+      - Running Jobs:
+          - running-jobs/README.md
+          - running-jobs/job-modes-and-limits.md
+          - running-jobs/launch-sh-reference.md
+          - running-jobs/watching-your-job.md
+          - running-jobs/checkpointing.md
+          - running-jobs/kubernetes.md
+      - GPU Access:
+          - gpu-access/README.md
+          - gpu-access/gpu-classes.md
+          - gpu-access/workloads-by-gpu-class.md
+          - gpu-access/gpu-hardware.md
+          - gpu-access/quotas-and-availability.md
+          - gpu-access/reservations.md
+          - gpu-access/service-units-and-budgets.md
+          - gpu-access/what-ends-a-session.md
+      - Environments:
+          - environments/README.md
+          - environments/standard-images.md
+          - environments/customizing-your-environment.md
+          - environments/building-a-custom-image.md
+      - Grading:
+          - grading/README.md
+          - grading/choosing-a-grading-tool.md
+          - grading/notebook-grading-workflow.md
+          - grading/grading-failures.md
+      - Reference:
+          - reference/README.md
+          - reference/error-messages.md
+          - reference/reservation-events.md
+          - reference/glossary.md
+          - reference/coming-from-hpc.md
+          - reference/managing-a-group.md
+          - reference/software.md
+          - reference/policy.md
+  - Support: reference/getting-help.md

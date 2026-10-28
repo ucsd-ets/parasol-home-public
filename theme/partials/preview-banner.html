@@ -1,0 +1,39 @@
+{#
+  CANVAS. Preview-site notice.
+
+  Rendered only when `extra.preview_banner` has a value. It is EMPTY in the
+  committed mkdocs.yml and must stay that way: .github/workflows/preview-site.yml
+  substitutes a value into that line when it stages the preview, so the
+  production build never carries this and stays byte-identical to what it was
+  before the preview existed.
+
+  Deliberately louder than the draft banner. The draft banner says the content
+  is unfinished; this says you are not looking at the published site at all,
+  which is a different and more urgent thing for a reader who arrived from a
+  link without noticing the hostname.
+
+  Uses the site's own canvas-scoped classes, never Bootstrap's .alert family:
+  Decorator's base.css does not restyle those, so they would render in stock
+  Bootstrap colours on a UC San Diego page.
+
+  The link goes to the published documentation: site_url, unless the site sets
+  extra.published_url. A site with no production host of its own yet takes the
+  preview's host as its site_url, and without published_url this link would
+  point back at the preview.
+#}
+{%- if config.extra.preview_banner %}
+{%- set published = config.extra.published_url or config.site_url %}
+<div class="container">
+	<div class="row">
+		<div class="docs-preview-banner" role="alert" aria-label="Preview site">
+			<p class="docs-preview-banner__label">Preview — not the published site</p>
+			<p>{{ config.extra.preview_banner }}</p>
+			{%- if published %}
+			<p class="docs-preview-banner__link">
+				<a href="{{ published }}">Go to the published documentation</a>
+			</p>
+			{%- endif %}
+		</div>
+	</div>
+</div>
+{%- endif %}

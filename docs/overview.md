@@ -1,0 +1,195 @@
+# How PARASOL Works {#datahub-and-dsmlp-overview}
+
+Start here if you are new to Datahub and the Platform for Applied Research, Analytics, Science and Open Learning (PARASOL, formerly DSMLP). Find out what the service offers every course and lab, the
+constraints that apply to all work on it, and the page to begin with for your
+role.
+
+## Datahub and PARASOL {#datahub-dsmlp-and-the-research-cluster}
+
+UC San Diego's Datahub and the Platform for Applied Research, Analytics,
+Science and Open Learning (PARASOL) provide students, instructors and
+researchers with Jupyter, RStudio and other computational resources, for
+scheduled classes, formal independent study, student projects and research.
+You reach PARASOL through Datahub in a browser, or through the login node from
+a terminal.
+PARASOL was formerly DSMLP, and research work on it was formerly called the
+Research Cluster. Older pages and articles use both names.
+
+The platforms are used in courses ranging from introductory Data Science
+lectures to graduate-level applied machine learning, and in curricula in
+Biology, Music, Social Sciences, and Public Health. In AY 2025-26, the platforms
+hosted more than 140 classes, 75 instructors, and 18,000 student enrollments,
+and more than 500 campus researchers.
+
+**Datahub** is the web interface, at
+[datahub.ucsd.edu](https://datahub.ucsd.edu). **PARASOL** is the cluster that
+runs Datahub sessions, and it is also reachable from a terminal. Datahub and
+PARASOL are a single service, and the same files are present in both.
+
+## Where to Begin
+
+Each audience has its own starting page.
+
+| Audience | Starting page | Assumes |
+|---|---|---|
+| A student enrolled in a course that uses Datahub | [Using Datahub in a Course](student-in-a-course.md) | A web browser and nothing else |
+| A student in such a course, where the course requires SSH, `launch.sh`, batch jobs, VS Code, or a GPU class the course menu does not offer | [Working from the Command Line](working-from-the-command-line.md) | A terminal and `ssh` |
+| Teaching or assisting with a course | [Teaching with Datahub and PARASOL](instructor-or-ta.md) | A browser for most tasks |
+| A student in a participating major or program, working outside a course workspace or a sponsored project | [Open Learning](open-learning.md) | A web browser |
+| Undertaking a personal project, independent study, capstone, or club or team project | [Projects & Independent Study](student-project.md) | Familiarity with a shell |
+| A graduate student, postdoc, undergraduate, or staff researcher working without a lab workspace | [Research on PARASOL](individual-researcher.md) | Familiarity with a shell |
+| Faculty arranging access for a research group | [Setting Up a Research Lab](faculty-research-lab.md) | Some steps are performed by ITS staff |
+
+Coursework, Open Learning, and a personal project are separate workspaces, with
+different eligibility, different resources, and different access lifetimes.
+[Using Datahub in a Course](student-in-a-course.md) and
+[Working from the Command Line](working-from-the-command-line.md) cover
+coursework. [Open Learning](open-learning.md) covers work outside a course in a
+participating major or program. [Projects & Independent Study](student-project.md)
+covers a personal project.
+
+## Workspaces
+
+Users are divided into groups called **workspaces**: one per course, one per
+lab, or one general catch-all population. A workspace anchors all cluster
+configuration: rosters, storage, container images, GPU access, and storage and
+GPU quotas. See
+[What a Workspace Is and What It Controls](workspaces-and-storage/what-a-workspace-is.md).
+
+A member may belong to several workspaces at once, for example as a TA for one
+course, a student in another, and a member of a lab, and chooses the workspace
+to work in at launch. A member of more than one workspace has a home directory
+in each. See
+[Belonging to Several Workspaces](workspaces-and-storage/what-a-workspace-is.md#belonging-to-several-workspaces).
+
+See also: [Workspaces & Storage](workspaces-and-storage/README.md)
+
+## Standard Features
+
+### Job Environment
+
+All jobs, whether browser-based Jupyter sessions, command-line jobs, or batch
+jobs, run in a compute environment derived from the member's account and
+workspace together with any job-specific configuration. A course session in the
+browser typically begins at 2 CPU cores and 4GB RAM. See
+[The Browser Session](access/datahub-in-the-browser.md#the-browser-session).
+Upper limits are based on class size, demand, and capacity.
+
+### GPUs
+
+GPUs are organized into five classes by size rather than by hardware model.
+Each workspace is given access to one or more classes, matching its anticipated
+work. [GPU Class Sizes](gpu-access/gpu-classes.md#gpu-class-sizes) lists the
+classes.
+[Workloads by GPU Class](gpu-access/workloads-by-gpu-class.md) gives examples of
+the work each class suits.
+
+### Storage
+
+Each member has a per-user, per-workspace home directory; a shared area readable
+by everyone in the workspace; and a per-user, cluster-wide private area
+available in every workspace.
+[Where Files Live](workspaces-and-storage/your-files-and-quotas.md#where-files-live)
+lists the directories.
+[Workspace and Personal Quotas](workspaces-and-storage/your-files-and-quotas.md#workspace-and-personal-quotas)
+gives the quotas for course and research home directories.
+Optional mounts of external storage are available. See
+[Mounting External Storage](workspaces-and-storage/your-files-and-quotas.md#mounting-external-storage).
+
+### Standard Software Images
+
+Curated images cover the widely used Python, R, and Julia data analysis stacks.
+They include a CUDA/GPU-enabled image with TensorFlow and PyTorch, and an
+RStudio image. Courses and labs may further customize or pin their own images.
+[Standard Images, Tags, and Pinning](environments/standard-images.md) describes
+the images.
+
+### Ways to Work
+
+Work is done in a browser, at a terminal over SSH, or in a desktop editor such
+as VS Code connected to a cluster container. [Access](access/README.md)
+describes each route.
+
+## GPU Reservations
+
+From Fall 2026, access to GPUs is managed by a reservation system. A booking,
+made in the reservation app at
+[reserve.dsmlp.ucsd.edu](https://reserve.dsmlp.ucsd.edu/), holds capacity for a
+specific window, and for the length of that window sessions are admitted ahead
+of the walk-up queue. Ad-hoc,
+on-demand use without a booking is also supported.
+[Reservations](gpu-access/reservations.md) describes booking. Reservations,
+per-group quotas, and Service Unit budgets are the mechanisms that manage
+contention for GPUs. See [GPU Access](gpu-access/README.md).
+
+> [!WARNING]
+> An on-demand launch draws on the Service Unit budget as a booked window does,
+> and launching an eligible session authorizes that spend. See
+> [On-Demand Lease Charges](gpu-access/service-units-and-budgets.md#on-demand-lease-charges).
+
+## Platform Constraints
+
+### Root Access
+
+Containers run unprivileged, under the member's own UID, with no root or sudo
+inside the container. See
+[Root Access and System Packages](environments/customizing-your-environment.md#root-access-and-system-packages).
+`sudo apt-get install` fails by design, and the failure is not a fault to
+report.
+
+### Computation on the Login Node
+
+The login node is for launching jobs and moving files, and running computation
+on it is prohibited. See
+[What the Login Node Is For](access/the-login-node.md#what-the-login-node-is-for).
+
+### Idle GPU Sessions
+
+An idle GPU session still holds its GPU, and the session is reclaimed once it
+has been idle long enough. See
+[What Counts as Idle](gpu-access/what-ends-a-session.md#what-counts-as-idle).
+
+## Support
+
+Questions and feedback go to the contact for the topic.
+
+| Topic | Contact |
+|---|---|
+| A course a student is enrolled in | The instructor or TA, first |
+| Datahub or PARASOL itself, including research work | [parasol@ucsd.edu](mailto:parasol@ucsd.edu), or the [ITS Service Desk](https://support.ucsd.edu/) |
+| Universal Scale Storage, or research work, which Research IT also answers | Research IT, at [rcd-support@ucsd.edu](mailto:rcd-support@ucsd.edu) |
+| Which platform is appropriate for a research project | [Research IT](https://research-it.ucsd.edu/computing/index.html) |
+| 1:1 Consultation, for instructors, TAs, and Technical Points of Contact (TPOCs) | [ucsd-datahub.youcanbook.me](https://ucsd-datahub.youcanbook.me/) |
+
+Urgent or broadly scoped problems may be escalated through the ITS Service
+Desk. A ticket for such a problem states what is affected and how many people.
+See
+[Incidents Affecting More Than One Person](reference/getting-help.md#incidents-affecting-more-than-one-person).
+[Response Targets](reference/getting-help.md#response-targets) gives ITS
+response targets.
+[Support & Technical Consultation](instructor-or-ta.md#support--technical-consultation)
+sets out the terms of 1:1 Consultation.
+[Getting Help](reference/getting-help.md) lists all support routes.
+
+## Policy
+
+[Policy](reference/policy.md) sets out the conditions of use.
+
+- Highly sensitive data (P4), such as clinical records or export-controlled
+  information, must not be used on Datahub or PARASOL, and legally or
+  contractually protected information (P3) may be permitted after review. See
+  [Data Classification](reference/policy.md#data-classification).
+- Datahub and PARASOL system resources are shared among all courses and research
+  groups, and demand, in particular for GPUs, may exceed capacity in peak weeks,
+  weeks 6 to 10 of a quarter and finals week, or at assignment deadlines. See
+  [Use of Shared Resources](reference/policy.md#use-of-shared-resources).
+- Datahub may be unavailable during scheduled maintenance for time-sensitive
+  updates or security patches. Quarterly maintenance ends every running job.
+  [Scheduled Maintenance](reference/policy.md#scheduled-maintenance) gives the
+  schedule.
+- Datahub and PARASOL are not to be used to host externally available services or
+  applications except as required for coursework or projects. See
+  [Hosting Externally Available Services](reference/policy.md#hosting-externally-available-services)
+  and [Availability and Reliability](reference/policy.md#availability-and-reliability).
+- The campus-wide IT policy on acceptable use applies to Datahub and PARASOL. See
+  [Appropriate Use](reference/policy.md#appropriate-use).

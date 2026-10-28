@@ -1,0 +1,176 @@
+# Policy
+
+Check the conditions for using Datahub and PARASOL (formerly DSMLP) before you put data on the
+platform, host a service that people outside it can reach, or set a deadline
+that could fall in a maintenance window.
+
+## Data Classification
+
+P3 and P4 are University
+[classification levels](https://security.ucop.edu/policies/institutional-information-and-it-resource-classification.html).
+The University's classification is the authority on which level applies to a
+dataset.
+
+### P4 Data
+
+P4 data is prohibited. Highly sensitive information, such as clinical records or
+export-controlled material, must not be placed on Datahub or PARASOL. There is no
+review path and no exception.
+
+### P3 Data
+
+P3 data may be permitted after review. Legally or contractually protected
+information is not categorically excluded, but it must be raised with the
+contacts in
+[Contacts for Classification Questions](#contacts-for-classification-questions)
+before any of it reaches the cluster. Depending on the nature of the data,
+vetting may take 4-6 weeks or longer.
+
+### Examples by Kind of Data
+
+ITS documentation gives these examples:
+
+| Kind of data | Examples |
+|---|---|
+| Government classified or controlled | CUI, CTI, ITAR, FISMA |
+| Health and personal information | PHI/HIPAA, IRB-controlled data, statutory PII |
+| Student records | Other students' grades or academic records (FERPA) |
+| Contractually protected | Information subject to certain Data Use Agreements |
+
+### Contacts for Classification Questions
+
+Email [parasol@ucsd.edu](mailto:parasol@ucsd.edu). For research data, Research
+IT also answers at [rcd-support@ucsd.edu](mailto:rcd-support@ucsd.edu).
+See
+[Restricted & Licensed Datasets](../workspaces-and-storage/datasets.md#restricted--licensed-datasets).
+[Getting Help](getting-help.md) lists other support routes.
+
+## Appropriate Use
+
+### IT Acceptable Use Policy
+
+The campus-wide
+[IT Acceptable Use Policy](https://adminrecords.ucsd.edu/ppm/docs/135-9.html)
+applies to Datahub and PARASOL as it does to any campus IT resource, including its
+prohibitions on commercial or political activity, hacking or cyberstalking, and
+other types of unwelcome behavior. The platform's academic purpose does not
+relax it.
+
+### Individual Access and Sharing
+
+Access is granted to an individual, not to that individual's collaborators. An
+account, its home directory, and any dataset granted with it are for the account
+holder's own use and are not passed on. The workspace's `public/` and `teams/`
+areas are the sanctioned route for sharing. See
+[Inside the Workspace](../workspaces-and-storage/moving-and-sharing-data.md#inside-the-workspace).
+
+## Hosting Externally Available Services
+
+Datahub and PARASOL should not be used to host externally available services or
+applications, except as required for coursework or projects. A class demo, a
+project web application, or a service an assignment requires is in scope. A
+production service, a persistent public endpoint, or anything whose outage
+someone outside the University would notice is out of scope.
+[Reaching a Notebook or a Service](../access/the-login-node.md#reaching-a-notebook-or-a-service)
+describes access to a service running in a container.
+
+### Availability and Reliability
+
+A compute node can be drained for patching, a pod can be preempted, and a
+session has a deadline. These conditions apply primarily to the compute nodes
+that execute user jobs. Critical components such as networking, file storage,
+and backups are maintained to Enterprise IT standards.
+
+## Use of Shared Resources
+
+The practices in this section are requests rather than rules, with the exception
+of the prohibition in
+[Computation on the Login Node](#computation-on-the-login-node).
+
+### Stopping Unused Sessions
+
+Sessions that are not in use are expected to be stopped. GPU cards are assigned
+to containers exclusively, and a card attached to an idle session is unusable by
+any other user. Logging out, closing the tab, or closing a laptop leaves a
+session running; stop it with **File → Hub Control Panel → Stop My Server**, or
+delete the pod from the login node. See
+[Stopping a Session](../access/datahub-in-the-browser.md#stopping-a-session).
+
+Idle culling is not a substitute for stopping a session. On a quiet cluster, the
+delay before it acts is measured in hours.
+[What Counts as Idle](../gpu-access/what-ends-a-session.md#what-counts-as-idle)
+describes the idle criteria.
+
+### Debugging on CPU
+
+Code is expected to be debugged on CPU before a GPU is requested. PyTorch and
+TensorFlow both switch easily between CPU and GPU. [Access](../access/README.md)
+describes the ways to start a session.
+
+### Sizing Resource Requests
+
+Requests are expected to name the smallest resources that work: the smallest GPU
+class a model fits in, the memory a job needs rather than the maximum permitted,
+and the hours the job actually takes. A larger GPU class is not faster for a
+model that already fits in a smaller one.
+[GPU Classes](../gpu-access/gpu-classes.md) describes the classes.
+
+### Computation on the Login Node
+
+Running computation on the login node, such as a training script, a build, or a
+long analysis, is prohibited; the login node is for launching jobs and moving
+files. See
+[What the Login Node Is For](../access/the-login-node.md#what-the-login-node-is-for).
+
+### Personal Copies of Shared Datasets
+
+A shared dataset is expected to be read where it lives rather than copied. A
+per-student copy of a large corpus exhausts a home quota.
+[Datasets](../workspaces-and-storage/datasets.md) describes shared datasets.
+
+### Canceling Unused Bookings
+
+A booking that will not be used is expected to be canceled. Canceling at least
+24 hours ahead costs nothing, and the capacity returns to the pool.
+[The Cancellation Penalty](../gpu-access/service-units-and-budgets.md#the-cancellation-penalty)
+describes penalties.
+
+### Peak GPU Demand
+
+Demand for GPUs is highest in **peak weeks**: weeks 6 to 10 of a quarter and
+finals week. In peak weeks and at assignment deadlines, demand may exceed
+capacity, and coursework is served ahead of project, research, and Open Learning
+work. Work
+shifted to a daytime or off-peak hour costs less. See
+[Peak & Off-Peak Hours](../gpu-access/service-units-and-budgets.md#peak--off-peak-hours).
+
+## Self-Supporting Programs
+
+[Self-supporting programs](https://blink.ucsd.edu/instructors/academic-info/majors/selfsupport-codes.html)
+such as MAS and MBA may use Datahub and PARASOL for coursework or projects.
+[UC policy](https://www.ucop.edu/institutional-research-academic-planning/content-analysis/academic-planning/self-supporting-programs.html)
+requires ITS to recover the associated direct and indirect costs. To discuss
+cost recovery, email [parasol@ucsd.edu](mailto:parasol@ucsd.edu).
+
+[Workspace and Personal Quotas](../workspaces-and-storage/your-files-and-quotas.md#workspace-and-personal-quotas)
+sets out charges for storage.
+
+See also: [Mounting External Storage](../workspaces-and-storage/your-files-and-quotas.md#mounting-external-storage)
+
+## Scheduled Maintenance
+
+### Weekly Maintenance {#instructional-maintenance}
+
+Weekly maintenance runs Tuesdays, 6-8 AM, across the whole cluster, for courses
+and research alike. The work is usually limited to a subset of worker nodes, in
+which case running jobs are unaffected.
+Do not plan a deadline within this window. Infrequent 'Critical' updates may
+require downtime outside the window; ITS notifies instructors of such downtime
+as soon as is practical.
+
+### Quarterly Maintenance {#research-cluster-maintenance}
+
+The quarterly maintenance window falls at the break between terms, with about
+7 days' notice. All running jobs are terminated, for courses and research alike.
+[Maintenance Closures](../gpu-access/what-ends-a-session.md#maintenance-closures)
+describes the effect on sessions.

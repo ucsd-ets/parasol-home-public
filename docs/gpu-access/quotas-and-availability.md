@@ -1,0 +1,326 @@
+# Quotas, Cohorts & Availability
+
+Use this page when a GPU launch waits, or when the reservation calendar offers
+nothing although your workspace has quota to spare. Find out which capacity
+limit applies and how to get more GPU capacity.
+
+## What a Quota Is
+
+A **quota** is the maximum number of GPUs of each class that a workspace may
+hold at one time. A quota is not a reservation of hardware, not an individual
+allowance, and not a Service Unit budget.
+
+The quota belongs to the workspace, not to the member. Every member of a course
+or lab draws on the same ceiling. A launch refused because the workspace is at
+its limit means that other members hold the capacity. The quota sets how much
+capacity the workspace has, and Service Units divide it fairly between members.
+See [Service Units & Budgets](service-units-and-budgets.md).
+
+Quotas are set per GPU class. A workspace at its `medium` limit may still have
+`small` headroom. A workspace is granted particular classes, and a request for a
+class it was not granted is refused whatever is idle. Spare capacity in one
+class cannot be lent to another, so a busy `medium` class says nothing about
+`large`. [GPU Classes](gpu-classes.md) describes the classes.
+
+## Date-Based Quota Changes
+
+Quotas are date-aware and can be set week by week or day by day. A course's
+share can be raised for the span of a project deadline and revert automatically
+afterward. A lab's share can be raised the same way for a conference deadline.
+
+A dated change requires the dates in advance. For courses, the quarterly survey
+asks instructors and TAs about assignment scope, GPU sizes, and deadlines. The
+answers allow a quota to be raised for week 9 before the surge begins.
+[Teaching with Datahub and PARASOL](../instructor-or-ta.md) covers course GPU
+planning.
+For research workspaces, include the date in the request; see
+[Requesting a Quota Increase](#requesting-a-quota-increase).
+
+## Borrowing Beyond Quota
+
+Quotas are not hard ceilings, and borrowing is enabled on the cluster. A
+booking or an on-demand lease may use idle capacity beyond its workspace's quota
+for any hour within 12 hours of the moment it is made. Hours further ahead are
+held to the quota. A group that has exhausted its share can still obtain GPUs
+that would otherwise be idle.
+
+Borrowing is opportunistic. A group borrows whatever capacity is idle at the
+moment it asks. Once a booking or lease is admitted, the borrowed capacity is
+protected like any other reservation for its full length.
+
+Borrowing has two tiers, and course workspaces always hold the senior tier. The
+junior tier may borrow only the capacity above a deeper reserve floor. The tier
+matters only when a reservation is made, not after it is admitted. Groups that
+contribute hardware to the cluster have a separate arrangement. See
+[Setting Up a Research Lab](../faculty-research-lab.md).
+
+Borrowing does not raise a Service Unit budget. Borrowed GPU time is charged at
+the same rate as any other.
+
+### The Reserve Floor
+
+ITS maintains a reserve floor of unborrowable capacity in each GPU class. Idle
+capacity is therefore not always available. The status page may show free GPUs
+of a class that borrowing will not release, because part of that headroom is
+held back.
+
+The floor is deepest for an hour 12 hours away and shrinks as the hour
+approaches, so idle capacity opens to borrowing gradually rather than all at
+once. The junior tier's deeper floor stays the same at every lead time.
+
+## Cohorts
+
+A **cohort** is a group of groups. Within a cohort, the member groups' quotas
+may sum to more than the physical capacity behind them. This allows each group
+a higher peak than a fixed division of the hardware would. Where several groups
+in a cohort peak at the same time, availability can read zero while a workspace
+still has headroom; see
+[Zero Availability With Headroom Remaining](#zero-availability-with-headroom-remaining).
+
+A cohort is not a workspace. Members belong to a workspace, and that workspace
+may sit in a cohort alongside groups its members never encounter.
+[What a Workspace Is and What It Controls](../workspaces-and-storage/what-a-workspace-is.md)
+describes workspaces.
+
+The reservation app does not show members which cohort their workspace is in.
+The word appears only in some refusals, such as
+`Only 0 GPU(s) available for this cohort at …`, and on the workspace managers'
+**Reports** and **GPU Loans** pages.
+
+### Zero Availability With Headroom Remaining
+
+The reservation calendar can offer nothing even where a workspace has quota to
+spare. This is not a fault. A quota is a ceiling on what a group may hold, not a
+set of GPUs held aside for it. For example, a workspace whose `medium` quota is
+four and which currently holds none can be offered nothing on a Thursday
+evening, because the other groups in its cohort hold the hardware, as they are
+entitled to.
+
+The quota has not been reduced and the budget is untouched. The same request
+often succeeds a few hours later. Bookings are first-come, and quota headroom
+does not displace a booking that already exists. Options when nothing is
+available:
+
+- Book a different hour rather than a different day. Peak evening demand is the
+  constraint. The same window at midday or overnight is more likely to be
+  available and is cheaper under
+  [Peak & Off-Peak Hours](service-units-and-budgets.md#peak--off-peak-hours).
+- Request a smaller class. Classes do not share spare capacity with one
+  another, so a full `medium` class says nothing about `small`.
+- Borrow inside 12 hours. Last-minute jobs may pick up capacity that is idle at
+  the time, including capacity beyond the group's own quota; see
+  [Borrowing Beyond Quota](#borrowing-beyond-quota).
+
+Overcommitment affects what can be obtained, not what is delivered. A GPU that
+is obtained is held for the window at the class it was booked at. A cohort does
+not make a session slower.
+
+Zero availability is not an outage and does not need a ticket. A cohort that is
+consistently unable to work indicates a provisioning problem. Report it to the
+instructor, TA, or PI.
+
+### Cohorts Without Overcommitment
+
+Where a set of quotas sums to the physical capacity behind it, the members of
+that cohort are guaranteed access up to their full group ceiling through to the
+12-hour boundary. Zero availability with headroom remaining does not arise in
+such a cohort. Where a cohort is deliberately overcommitted, the group ceiling
+is a maximum rather than a guarantee.
+
+The cohort holding hardware contributors is not overcommitted. A lab that
+contributes hardware has group limits matching its contribution, so its own
+capacity is available when it books.
+[Setting Up a Research Lab](../faculty-research-lab.md) covers hardware
+contribution.
+
+## Limits That Can Stop a Launch
+
+Four separate capacity limits can stop the same launch, and they fail in similar
+ways.
+
+| Limit | What it caps | Reference |
+|---|---|---|
+| A single pod | What one container may hold | [Defaults and Resource Tiers](../running-jobs/launch-sh-reference.md#defaults-and-resource-tiers) |
+| The namespace | Everything running at once | [Running Several Jobs at Once](../running-jobs/job-modes-and-limits.md#running-several-jobs-at-once) |
+| The group quota | What the whole workspace may hold, per class | [What a Quota Is](#what-a-quota-is) |
+| The cohort | What the surrounding groups are holding at the moment | [Cohorts](#cohorts) |
+
+A Service Unit budget is a fifth limit, and it is not a capacity limit. It caps
+how much GPU time a member may spend, not how many GPUs exist to spend it on.
+Remaining budget does not mean a GPU is free, and a free GPU does not mean the
+budget covers it.
+
+A GPU quota does not cover storage. Storage quotas are a separate system with
+different values; see
+[Workspace and Personal Quotas](../workspaces-and-storage/your-files-and-quotas.md#workspace-and-personal-quotas).
+
+## When the Cluster Is Full
+
+The table lists the symptoms of a launch that cannot obtain a GPU.
+
+| Symptom | Meaning |
+|---|---|
+| A session takes a long time to start | The request is waiting for capacity. It has not failed. |
+| An `OnDemandLeaseDenied` event | The on-demand lease the launch asked for was refused. The pod waits, and the request is retried. The event says whether waiting can help. See [Waiting for an On-Demand Lease](#waiting-for-an-on-demand-lease). |
+| The same event on Datahub | Datahub shows the pod's events while a session is starting, including `OnDemandLeaseDenied`. |
+| An `OnDemandAdmissionPaused` event | On-demand admission is paused for the whole class, for example while its nodes are down. Leave the pod in place. |
+| A `WaitingForNode` event | The pod was launched with `-n` or `-v`, and no node it allows has a free GPU. No lease is requested, and nothing is charged, until one does. See [Node Selection](../running-jobs/launch-sh-reference.md#node-selection). |
+| A GPU class shows no availability for a date | The class is fully booked, or capacity has been withdrawn for maintenance. See [Maintenance Closures](what-ends-a-session.md#maintenance-closures). |
+| A `FailedScheduling` event from the scheduler | Normal for every GPU pod that has not yet been admitted. Read the reservation events beside it. See [Missing or Misspelled Class Label](gpu-classes.md#missing-or-misspelled-class-label). |
+
+[Reservation Events](../reference/reservation-events.md) lists every event the
+reservation system writes.
+
+Zero availability does not always mean the cluster is full. Two other
+conditions produce the same symptom: a request for a class the workspace was
+not granted, which is refused whatever is idle, and a cohort that is fully drawn
+while one of its groups still has headroom on paper. See
+[What a Quota Is](#what-a-quota-is) and
+[Zero Availability With Headroom Remaining](#zero-availability-with-headroom-remaining).
+
+### Queue Position and Wait Time
+
+A reservation admits a session ahead of the walk-up queue. The walk-up queue
+itself is not visible: the platform reports no queue length, no queue position,
+no estimated wait, and no notification as a turn approaches. A waiting launch
+shows only that it is waiting.
+
+The wait depends on demand and can be much longer than a few minutes. If a
+launch has not obtained a GPU within 5 to 10 minutes, book a window in the
+reservation app instead. A GPU needed at a particular time is obtained by
+booking it through [Reservations](reservations.md).
+
+### Waiting for an On-Demand Lease
+
+Every GPU session that carries a class label, and has no booking to wait for,
+asks for an on-demand lease. The reservation system retries a refused request
+for as long as the pod exists, and the `OnDemandLeaseDenied` event says whether
+waiting can help:
+
+| Refusal | Retried |
+|---|---|
+| Capacity or budget that can free up | Every 2 to 5 minutes |
+| A refusal the reservation app expects to clear at a known time, such as a budget renewal | At that time, or every 30 minutes until then |
+| A refusal of the request itself, such as a class the workspace was not granted | At lengthening intervals, up to every 30 minutes |
+
+The request never fails outright, and nothing deletes the pod. A refusal of the
+request itself does not clear by waiting: delete the pod and launch again with
+the request corrected, or ask for the workspace setting that refused it to be
+changed.
+[`OnDemandLeaseDenied`](../reference/reservation-events.md#ondemandleasedenied)
+gives the event text.
+
+Waiting pods are served in the order the pods were created, so deleting and
+recreating a pod moves it to the back.
+
+> [!WARNING]
+> A forgotten pending GPU pod starts, and is charged, as soon as capacity or
+> budget frees up, even days later. Delete a pending pod that is no longer
+> wanted with `kubectl delete pod <pod-id>`, or stop the Datahub session.
+
+### Waiting for Capacity
+
+A launch that carries `-f` releases its GPU when the script ends. The flag runs
+the script and ends the container, so a launch that waited for a GPU holds it
+only for the length of the script.
+[Job Modes](../running-jobs/job-modes-and-limits.md#job-modes) covers the flag.
+
+## Obtaining Capacity When the Cluster Is Busy
+
+- Check [The Status Page](#the-status-page) before launching. It shows the GPU
+  models on each node and how many GPUs are free. For free GPUs by class, see
+  [Upcoming Availability in the Reservation App](#upcoming-availability-in-the-reservation-app).
+- Book a window instead of retrying. Repeated launches into a full cluster do
+  not obtain a GPU, and each on-demand launch that succeeds spends Service
+  Units; see
+  [On-Demand Lease Charges](service-units-and-budgets.md#on-demand-lease-charges).
+  A window booked a day ahead costs the same Service Units and obtains the GPU.
+- Move work off peak evening hours. Contention is concentrated in peak evening
+  hours, and off-peak hours are discounted under
+  [Peak & Off-Peak Hours](service-units-and-budgets.md#peak--off-peak-hours).
+- Develop on CPU and train on GPU. A GPU attached to a container is unusable by
+  anyone else even while it is idle. PyTorch and TensorFlow both switch between
+  CPU and GPU with very little code. Developing on CPU is also the fastest route
+  to a session when GPUs are scarce.
+- Stop finished sessions with **File → Hub Control Panel → Stop My Server** in
+  the browser, or with `kubectl delete pod <pod-id>` from the shell.
+- Borrow idle capacity beyond the workspace quota for last-minute work; see
+  [Borrowing Beyond Quota](#borrowing-beyond-quota).
+
+> [!WARNING]
+> Logging out does not stop a session. A session left running holds its GPU.
+> See [Stopping a Session](../access/datahub-in-the-browser.md#stopping-a-session).
+
+## The Status Page
+
+[datahub.ucsd.edu/hub/status](https://datahub.ucsd.edu/hub/status) is the live
+view of the cluster. It lists the compute nodes, the GPU models on each node,
+and how many GPUs on each node are currently free.
+
+The status page can be read without signing in, so it stays available while a
+Datahub sign-in is failing.
+[Sign-In & Session Problems](../access/sign-in-and-session-problems.md) covers
+sign-in problems.
+
+The current capacity of each GPU class, as the reservation system counts it, is
+in the reservation app at
+[reserve.dsmlp.ucsd.edu](https://reserve.dsmlp.ucsd.edu/); see
+[Upcoming Availability in the Reservation App](#upcoming-availability-in-the-reservation-app).
+
+| Information | Use |
+|---|---|
+| GPU models | The hardware behind each class at the moment. A GPU is requested by class, with `-l gpu-class=`, because GPU access is granted by class. `-v` limits a session to one model within its class, and is for a session launched without a booking only. See [Node Selection](../running-jobs/launch-sh-reference.md#node-selection). |
+| Node numbers | The `-n` flag takes a bare number: `-n 30`, not `-n n30`. The leading `n` shown on the status page is not part of the value. A pod pinned to a full node waits for that node rather than taking the same GPU elsewhere. Pin a node only for a session launched without a booking; see [Node Selection](../running-jobs/launch-sh-reference.md#node-selection). |
+| Demand over the day | Peak evening demand is predictable and is visible on the status page. |
+
+During weekly maintenance, the status page may show less hardware than
+usual. This does not indicate a fault. The maintenance schedule is published under
+[Scheduled Maintenance](../reference/policy.md#scheduled-maintenance).
+
+See also: [`launch.sh` Reference](../running-jobs/launch-sh-reference.md)
+
+### Upcoming Availability in the Reservation App
+
+The reservation app's **Dashboard** carries an **Upcoming Availability** panel.
+For each GPU class, it shows the GPUs free now and in each hour up to 12 hours
+ahead, across the whole cluster. The figures leave out the reserve floor: in
+`Free now 3/6`, the 6 is the capacity above the floor, not the class's size.
+**Show exact hourly numbers** gives the figures as a table.
+
+The panel does not apply a workspace's quota or cohort. The booking wizard
+does, so the numbers it offers for the same hour are often lower.
+
+### Limitations of the Status Page
+
+A GPU that the status page shows as free may still not be obtainable. The page
+does not reflect any of these conditions:
+
+| Condition | Effect |
+|---|---|
+| The workspace was not granted the GPU class | A class the workspace was not granted is refused whatever is idle. See [GPU Classes](gpu-classes.md). |
+| The reserve floor | Part of the visible headroom in each class is unborrowable capacity that ITS holds back. See [The Reserve Floor](#the-reserve-floor). |
+| A cohort | The workspace may sit in a cohort whose groups' quotas together exceed the hardware behind them. See [Cohorts](#cohorts). |
+| A reservation | From Fall 2026, a booked window holds hardware that stays idle until its owner launches into it. See [Reservations](reservations.md). |
+| The Service Unit budget | The budget is a separate limit. A free GPU does not mean the budget covers it. See [Service Units & Budgets](service-units-and-budgets.md). |
+
+The status page describes hardware, not entitlement, and shows a snapshot. On a
+busy evening, availability can change between reading the page and launching.
+Booking a window is the alternative to refreshing the page.
+
+Zero availability is not an outage and does not need a ticket. Report a GPU
+class that is unobtainable for days rather than hours, or a status page that is
+unreachable while datahub.ucsd.edu is up, through
+[Getting Help](../reference/getting-help.md).
+
+## Requesting a Quota Increase
+
+Quotas and group limits are set administratively. A workspace manager (an
+instructor, TA, or PI) may view them but may not edit them.
+[Managing a Group](../reference/managing-a-group.md) describes manager
+privileges.
+
+Send the request by ticket to [parasol@ucsd.edu](mailto:parasol@ucsd.edu),
+naming the work, the GPU class it needs, and the dates it matters on. A request
+that names a deadline can be granted for that window alone.
+
+See also: [Administrative Requests](../reference/getting-help.md#administrative-requests)
