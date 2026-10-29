@@ -22,17 +22,17 @@ a course.
 
 ## GPU Servers Arriving in Winter 2027
 
-The Halıcıoğlu School of Data Science and Computing is adding new GPU servers to the platform in Winter 2027.
+The Halıcıoğlu School of Data Science and Computing is adding four GPU servers to the platform in Winter 2027, nearly tripling its overall GPU capacity. The addition was enabled by Taner Halıcıoğlu's founding gift.
 
 <ul class="row agent-metric-grid" aria-label="GPU capacity arriving in Winter 2027">
-<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">TBA</strong><span class="agent-metric-label">GPU servers</span><span class="agent-metric-note">Arriving in Winter 2027</span></div></li>
-<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">TBA</strong><span class="agent-metric-label">GPUs in total</span><span class="agent-metric-note">NVIDIA RTX PRO 6000 Blackwell</span></div></li>
-<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">TBA</strong><span class="agent-metric-label">Peak GPU-hours a year</span><span class="agent-metric-note">Approximate, for coursework and student projects</span></div></li>
-<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">TBA</strong><span class="agent-metric-label">Off-peak GPU-hours a year</span><span class="agent-metric-note">For approved research, capstones, and graduate work</span></div></li>
+<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">4</strong><span class="agent-metric-label">GPU servers</span><span class="agent-metric-note">Arriving in Winter 2027</span></div></li>
+<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">32</strong><span class="agent-metric-label">GPUs in total</span><span class="agent-metric-note">NVIDIA RTX PRO 6000 Blackwell</span></div></li>
+<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">66,800</strong><span class="agent-metric-label">Peak GPU-hours a year</span><span class="agent-metric-note">Approximate, for coursework and student projects</span></div></li>
+<li class="col-sm-6 col-md-3"><div class="agent-metric-card"><strong class="agent-metric-value">213,000+</strong><span class="agent-metric-label">Off-peak GPU-hours a year</span><span class="agent-metric-note">For approved research, capstones, and graduate work</span></div></li>
 </ul>
 
 Courses, projects and research groups across campus can use the new
-servers.
+servers. The campus is grateful to the School for funding them. The School has first claim on them, for its courses in peak weeks and for courses, research and approved projects at other times. An hour the School has not booked opens to the rest of the campus gradually, over the 12 hours before it starts.
 
 [GPU Hardware & CUDA](../gpu-access/gpu-hardware.md) lists the GPU models
 behind each GPU class, including the RTX PRO 6000 Blackwell that the new

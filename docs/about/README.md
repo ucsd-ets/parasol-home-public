@@ -44,7 +44,7 @@ hub: true
 <p class="home-kicker">Who runs it</p>
 <h2 id="about-who-runs-heading">Operations and Support</h2>
 <p>UC San Diego IT Services builds and runs PARASOL, including Datahub, the cluster, the reservation app, and support at <a href="mailto:parasol@ucsd.edu">parasol@ucsd.edu</a>. IT Services also gives instructors guidance and training on setting up a course. Questions about research work go to <a href="mailto:parasol@ucsd.edu">parasol@ucsd.edu</a> too. Research IT also answers them at <a href="mailto:rcd-support@ucsd.edu">rcd-support@ucsd.edu</a>, and helps researchers decide whether PARASOL or another campus platform fits their work.</p>
-
+<p>The Halıcıoğlu School of Data Science and Computing funded the GPU servers arriving in Winter 2027, and the campus is grateful for the School's contribution. The School has first claim on the new servers, for its courses in peak weeks and for courses, research and approved projects at other times. An hour the School has not booked opens to the rest of the campus gradually, over the 12 hours before it starts.</p>
 </div>
 <div class="col-md-5 hub-split-media">
 <aside class="dsmlp-resource-panel" aria-labelledby="about-policy-heading"><p class="home-kicker">Before you put data on the platform</p><h3 id="about-policy-heading">Conditions of Use</h3><ul><li><a href="/reference/policy/#data-classification">Data Classification</a></li><li><a href="/reference/policy/#use-of-shared-resources">Use of Shared Resources</a></li><li><a href="/reference/policy/#scheduled-maintenance">Scheduled Maintenance</a></li><li><a href="/reference/policy/">Policy</a></li></ul></aside>

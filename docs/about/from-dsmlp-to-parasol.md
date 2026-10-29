@@ -42,7 +42,7 @@ eyebrow: About PARASOL
 <article class="docs-card"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span><p class="docs-card-title">The support address</p><p>Questions about the platform go to <a href="mailto:parasol@ucsd.edu">parasol@ucsd.edu</a>.</p></article>
 <article class="docs-card"><span aria-hidden="true" class="glyphicon glyphicon-search"></span><p class="docs-card-title">Research work</p><p>Research that ran as the Research Cluster is part of PARASOL, on the same cluster, with the same tools and support as instruction. Coursework comes first in <a href="/reference/policy/#peak-gpu-demand">peak weeks</a>. Questions go to <a href="mailto:parasol@ucsd.edu">parasol@ucsd.edu</a>, and Research IT also answers them at <a href="mailto:rcd-support@ucsd.edu">rcd-support@ucsd.edu</a>.</p></article>
 <article class="docs-card"><span aria-hidden="true" class="glyphicon glyphicon-book"></span><p class="docs-card-title">The documentation home</p><p>Every page of the DSMLP documentation is on this site too, at the same address, alongside the guides for each audience.</p></article>
-<article class="docs-card"><span aria-hidden="true" class="glyphicon glyphicon-flash"></span><p class="docs-card-title">GPU capacity</p><p>New GPU servers arrive in Winter 2027. See <a href="/about/why-parasol/">Why PARASOL</a>.</p></article>
+<article class="docs-card"><span aria-hidden="true" class="glyphicon glyphicon-flash"></span><p class="docs-card-title">GPU capacity</p><p>Four new GPU servers arrive in Winter 2027. See <a href="/about/why-parasol/">Why PARASOL</a>.</p></article>
 </div>
 
 ## Where the Old Documentation Went

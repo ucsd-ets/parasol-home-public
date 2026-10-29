@@ -23,6 +23,18 @@
 {%- if item.children -%}{{ first_url(item.children[0]) }}{%- else -%}{{ item.url }}{%- endif -%}
 {%- endmacro -%}
 
+{#-
+  href: the URL a chrome nav link uses. Chrome URLs are normally root-relative
+  (`/{{ item.url }}`), but an override may carry an absolute URL, which must be
+  passed through unchanged rather than given a second leading slash.
+-#}
+{%- macro href(url) -%}
+{%- if url and url.startswith('http://') or url and url.startswith('https://') -%}{{ url }}
+{%- elif url -%}/{{ url }}
+{%- else -%}/
+{%- endif -%}
+{%- endmacro -%}
+
 {%- macro landing(section) -%}
 {%- if section.children and section.children[0].is_page and section.children[0].is_index -%}1{%- endif -%}
 {%- endmacro -%}

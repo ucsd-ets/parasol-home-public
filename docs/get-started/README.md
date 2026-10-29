@@ -23,7 +23,7 @@ hub: true
 <p><a class="btn btn-primary" href="/open-learning/">Start with Open Learning</a></p>
 </div>
 <div class="col-md-5 hub-split-media">
-<aside class="dsmlp-resource-panel" aria-labelledby="start-open-learning-programs-heading"><p class="home-kicker">Eligible programs</p><h3 id="start-open-learning-programs-heading">Who Has Open Learning</h3><ul><li><a href="/open-learning/#eligible-programs">Halıcıoğlu School Affiliates</a></li></ul><p>The Data Science and Artificial Intelligence majors, the Data Science minor, and the data science master's and Ph.D. programs. Other schools can offer Open Learning to their students. If your program is not listed and you would use it, tell your dean's office.</p></aside>
+<aside class="dsmlp-resource-panel" aria-labelledby="start-open-learning-programs-heading"><p class="home-kicker">Eligible programs</p><h3 id="start-open-learning-programs-heading">Who Has Open Learning</h3><ul><li><a href="/open-learning/#eligible-programs">Halıcıoğlu School Affiliates</a></li></ul><p>The Data Science and Artificial Intelligence majors, the Data Science minor, and the data science master's and Ph.D. programs. Other schools can offer Open Learning to their students. The Halıcıoğlu School's Open Learning workspace draws on the School's own GPU capacity, alongside its courses and research. If your program is not listed and you would use it, tell your dean's office.</p></aside>
 </div>
 </div>
 </section>

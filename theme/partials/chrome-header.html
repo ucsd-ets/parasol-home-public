@@ -89,18 +89,29 @@
 
 		<ul class="nav navmenu-nav">
 {%- for item in nav %}
+{%- set top_nav_overrides = config.extra.top_nav_overrides
+    if config.extra and config.extra.preview_banner and config.extra.top_nav_overrides else none %}
+{%- set override = top_nav_overrides[item.title]
+    if top_nav_overrides and item.title in top_nav_overrides else none %}
+{%- set rendered = override if override else item %}
 {%- set entries = item.children[1:] if navm.landing(item) else item.children %}
+{%- if override %}
+{%- set entries = rendered.children %}
+{%- set item_url = rendered.url %}
+{%- else %}
+{%- set item_url = navm.first_url(item) %}
+{%- endif %}
 {%- if entries %}
 			<li class="dropdown{{ ' active' if item.active }}">
-				<a href="/{{ navm.first_url(item) }}" class="dropdown-toggle">{{ item.title }} <b class="caret"></b></a>
+				<a href="{{ navm.href(item_url) }}" class="dropdown-toggle">{{ rendered.title }} <b class="caret"></b></a>
 				<ul class="dropdown-menu navmenu-nav">
 {%- for child in entries %}
-					<li><a href="/{{ navm.first_url(child) }}">{{ child.title }}</a></li>
+					<li><a href="{{ navm.href(navm.first_url(child)) }}">{{ child.title }}</a></li>
 {%- endfor %}
 				</ul>
 			</li>
 {%- else %}
-			<li class="{{ 'active' if item.active }}"><a href="/{{ navm.first_url(item) }}">{{ item.title }}</a></li>
+			<li class="{{ 'active' if item.active }}"><a href="{{ navm.href(item_url) }}">{{ rendered.title }}</a></li>
 {%- endif %}
 {%- endfor %}
 		</ul>
@@ -133,19 +144,30 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 {%- for item in nav %}
+{%- set top_nav_overrides = config.extra.top_nav_overrides
+    if config.extra and config.extra.preview_banner and config.extra.top_nav_overrides else none %}
+{%- set override = top_nav_overrides[item.title]
+    if top_nav_overrides and item.title in top_nav_overrides else none %}
+{%- set rendered = override if override else item %}
 {%- set entries = item.children[1:] if navm.landing(item) else item.children %}
+{%- if override %}
+{%- set entries = rendered.children %}
+{%- set item_url = rendered.url %}
+{%- else %}
+{%- set item_url = navm.first_url(item) %}
+{%- endif %}
 {%- if entries %}
 					<li class="dropdown{{ ' active' if item.active }}">
-						<a href="/{{ navm.first_url(item) }}" class="dropdown-toggle" data-hover="dropdown" role="button"
-							aria-haspopup="true" aria-expanded="false">{{ item.title }} <span class="caret"></span></a>
+						<a href="{{ navm.href(item_url) }}" class="dropdown-toggle" data-hover="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false">{{ rendered.title }} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 {%- for child in entries %}
-							<li><a href="/{{ navm.first_url(child) }}">{{ child.title }}</a></li>
+							<li><a href="{{ navm.href(navm.first_url(child)) }}">{{ child.title }}</a></li>
 {%- endfor %}
 						</ul>
 					</li>
 {%- else %}
-					<li class="{{ 'active' if item.active }}"><a href="/{{ navm.first_url(item) }}">{{ item.title }}</a></li>
+					<li class="{{ 'active' if item.active }}"><a href="{{ navm.href(item_url) }}">{{ rendered.title }}</a></li>
 {%- endif %}
 {%- endfor %}
 				</ul>
