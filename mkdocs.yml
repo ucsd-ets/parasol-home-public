@@ -56,7 +56,7 @@ extra:
           art: slide-home
           title: PARASOL
           accent: ""
-          text: PARASOL (formerly DSMLP) – or Platform for Applied Research, Analytics, Science and Open Learning is designed to support current and future student demand for GPU computing resources in classroom settings, starting with prioritized access to Halıcıoğlu School students and faculty.
+          text: PARASOL (formerly DSMLP) – the Platform for Applied Research, Analytics, Science and Open Learning – is UC San Diego's campuswide platform for coursework, student projects and research. A major investment by the Halıcıoğlu School of Data Science and Computing will nearly triple its GPU capacity in Winter 2027, with School students and faculty getting first priority on the new capacity.
           link: /about/why-parasol/
           label: WHY PARASOL
         - id: from-dsmlp

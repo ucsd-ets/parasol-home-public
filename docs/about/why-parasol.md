@@ -1,6 +1,6 @@
 ---
 title: Why PARASOL
-description: Student demand for GPUs outgrew the platform. Reservations, and new GPU servers in Winter 2027, mean coursework no longer depends on paying for cloud time.
+description: Student demand for GPUs outgrew the platform. Reservations, and new GPU servers in Winter 2027, add capacity for coursework, student projects and research.
 eyebrow: About PARASOL
 ---
 
@@ -14,8 +14,9 @@ serves.
 ## What the Name Stands For
 
 PARASOL is short for **Platform for Applied Research, Analytics, Science and
-Open Learning**. The platform supports classroom GPU demand first, and runs
-research on the same cluster, with the same tools and support.
+Open Learning**. Coursework comes first during
+[peak weeks](../reference/policy.md#peak-gpu-demand), and research shares the
+same cluster, tools and support all year.
 From Winter 2027, [Open Learning](../open-learning.md) gives students in
 eligible majors and programs a workspace for coursework and exploration outside
 a course.
