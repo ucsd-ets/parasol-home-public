@@ -7,7 +7,7 @@
 # wholesale: override one and you own all of it.
 INHERIT: mkdocs.base.yml
 
-site_name: Datahub & PARASOL Documentation
+site_name: PARASOL
 site_description: >-
   Documentation for UC San Diego's Datahub and Platform for Applied Research,
   Analytics, Science and Open Learning (PARASOL, formerly DSMLP).
@@ -30,7 +30,7 @@ extra:
   home_template: ''
 
   # The home page's <title> (theme/main.html), in place of site_name. Other
-  # pages keep "Page | Datahub & PARASOL Documentation". Quoted: the value
+  # pages keep "Page | PARASOL". Quoted: the value
   # contains ": ", which YAML would otherwise read as a key.
   home_title: "PARASOL: Platform for Applied Research, Analytics, Science and Open Learning"
 
