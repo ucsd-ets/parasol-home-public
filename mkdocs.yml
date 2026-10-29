@@ -96,11 +96,9 @@ extra:
   # this file, so the line has to be here too. It MUST stay empty.
   preview_banner: ""
 
-  # The preview site carries the whole documentation set under review, but its
-  # top-nav Documentation entry points at the standalone documentation site.
-  # Keep the internal nav for breadcrumbs and the sidebar; this replaces only
-  # the matching top-nav item, and only where preview_banner is nonempty. The
-  # home page's Documentation by Topic panel uses the same host on preview.
+  # The top-nav Documentation entry and the home page's Documentation by Topic
+  # panel point at the standalone documentation site. Keep the internal nav for
+  # breadcrumbs and the sidebar; this replaces only the matching top-nav item.
   top_nav_overrides:
     Documentation:
       title: Documentation

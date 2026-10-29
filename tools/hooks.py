@@ -84,10 +84,9 @@ def on_page_content(html: str, page=None, config=None, files=None) -> str:
     return _home_docs_links(_scroll_tables(html, page), page, config)
 
 
-# The preview site carries the documentation set under review, but its
-# "Documentation by Topic" panel should point at the standalone documentation
+# The "Documentation by Topic" panel points at the standalone documentation
 # site. The host comes from the same override as the top nav, so the two stay
-# in step; production leaves preview_banner empty and keeps the links here.
+# in step.
 HOME_DOCS_PANEL = re.compile(
     r'(<nav class="hub-section hub-link-panel" aria-labelledby="home-docs-heading">)(.*?)(</nav>)',
     re.S,
@@ -101,7 +100,7 @@ def _home_docs_links(html, page=None, config=None):
     extra = (config.get("extra") or {}) if config is not None else {}
     override = (extra.get("top_nav_overrides") or {}).get("Documentation") or {}
     base = override.get("url", "").rstrip("/")
-    if not extra.get("preview_banner") or not base:
+    if not base:
         return html
 
     def rewrite_href(match):

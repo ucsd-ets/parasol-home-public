@@ -90,7 +90,7 @@
 		<ul class="nav navmenu-nav">
 {%- for item in nav %}
 {%- set top_nav_overrides = config.extra.top_nav_overrides
-    if config.extra and config.extra.preview_banner and config.extra.top_nav_overrides else none %}
+    if config.extra and config.extra.top_nav_overrides else none %}
 {%- set override = top_nav_overrides[item.title]
     if top_nav_overrides and item.title in top_nav_overrides else none %}
 {%- set rendered = override if override else item %}
@@ -145,7 +145,7 @@
 				<ul class="nav navbar-nav">
 {%- for item in nav %}
 {%- set top_nav_overrides = config.extra.top_nav_overrides
-    if config.extra and config.extra.preview_banner and config.extra.top_nav_overrides else none %}
+    if config.extra and config.extra.top_nav_overrides else none %}
 {%- set override = top_nav_overrides[item.title]
     if top_nav_overrides and item.title in top_nav_overrides else none %}
 {%- set rendered = override if override else item %}
